@@ -1,0 +1,23 @@
+
+{                                                                                
+  "name": "be.eloistree.dronesoccergoal",                              
+  "displayName": "Drone Soccer Goal",                        
+  "version": "0.0.1",                         
+  "unity": "2018.1",                             
+  "unityRelease": "",                             
+  "description": "Just a drone soccer goal.",                         
+  "keywords": ["Script","Tool"],                       
+  "dependencies":{},     
+  "relatedPackages":{},     
+  "samples" : [],     
+  "author" : {
+"name":"EloiStree",
+"mail":"",
+"url":""},     
+  "repository":{
+"type":"Git",
+"url":"",
+"footprint":"",
+"revision":"f91d04f81015c47663c1cd0ab0c2274686640b4a"},     
+  "category": "Script"                   
+} 
