@@ -34,9 +34,12 @@ public class GoalPointTriggerZoneMonoGenetic<T> : MonoBehaviour where T : MonoBe
         T script = other.GetComponentInChildren<T>();
         if (script != null)
         {
-            if (!m_dronesInCollision.ContainsKey(script))
+            if (!m_dronesInCollision.ContainsKey(script)) { 
                 m_dronesInCollision.Add(script, new DroneCollisionWithEntry(script));
-            m_dronesInCollision[script].m_rootWhenEnterPosition = script.transform.position;
+                m_dronesInCollision[script].m_rootWhenEnterPosition = script.transform.position;
+                Debug.DrawLine(m_goalDirection.position,
+                    m_dronesInCollision[script].m_rootWhenEnterPosition,Color.blue, 5);
+            }
             RefreshList();
         }
     }
@@ -47,18 +50,21 @@ public class GoalPointTriggerZoneMonoGenetic<T> : MonoBehaviour where T : MonoBe
         if (script != null)
         {
             if (!m_dronesInCollision.ContainsKey(script))
-                m_dronesInCollision.Add(script, new DroneCollisionWithEntry(script));
+                return;
+
             m_dronesInCollision[script].m_rootWhenExitPosition = script.transform.position;
             RefreshList();
 
             DroneCollisionWithEntry record = m_dronesInCollision[script];
             bool wasFrontEntry = m_goalDirection.InverseTransformPoint(record.m_rootWhenEnterPosition).z > 0;
             bool wasBackExit = m_goalDirection.InverseTransformPoint(record.m_rootWhenExitPosition).z <= 0;
-            if (wasFrontEntry && wasBackExit) {
+            bool isValide = wasFrontEntry && wasBackExit;
+            if (isValide) {
                 m_pointCountForDebug++;
                 m_onValideGoal.Invoke();
                 m_onPointChanged.Invoke(m_pointCountForDebug);
             }
+            Debug.DrawLine(m_goalDirection.position, record.m_rootWhenExitPosition, isValide?Color.green:Color.red, 5);
         }
     }
 
