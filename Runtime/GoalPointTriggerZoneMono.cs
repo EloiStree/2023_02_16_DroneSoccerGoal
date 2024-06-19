@@ -64,6 +64,7 @@ public class GoalPointTriggerZoneMonoGenetic<T> : MonoBehaviour where T : MonoBe
                 m_onValideGoal.Invoke();
                 m_onPointChanged.Invoke(m_pointCountForDebug);
             }
+            m_dronesInCollision.Remove(script);
             Debug.DrawLine(m_goalDirection.position, record.m_rootWhenExitPosition, isValide?Color.green:Color.red, 5);
         }
     }

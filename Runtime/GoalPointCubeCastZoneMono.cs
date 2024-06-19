@@ -18,6 +18,8 @@ public class GoalPointCubeCastZoneMonoGenetic<T> : MonoBehaviour where T : MonoB
     public Dictionary<T, DroneCollisionWithEntry> m_dronesInCollision = new Dictionary<T, DroneCollisionWithEntry>();
     public List<DroneCollisionWithEntry> m_debugCollisionList = new List<DroneCollisionWithEntry>();
 
+    public GameObject [] m_currentHitCastAll;
+
     public int          m_pointCountForDebug;
     public UnityEvent   m_onValideGoal;
     public Eloi.PrimitiveUnityEvent_Int m_onPointChanged;
@@ -58,7 +60,8 @@ public class GoalPointCubeCastZoneMonoGenetic<T> : MonoBehaviour where T : MonoB
             m_cubeCastZone.forward, m_cubeCastZone.rotation,0, m_maskToUse);
 
         m_previousList = m_currentList;
-        m_currentList = hits.Select(a => Get(a.collider.gameObject)).Where(a => a).ToList();
+        m_currentList = hits.Select(a => Get(a.collider.gameObject)).Where(a => a!=null).ToList();
+        m_currentHitCastAll= hits.Select(a => a.collider.gameObject).ToArray();
         m_addedToList = m_currentList.Except(m_previousList).ToList();
         m_removeFromList = m_previousList.Except(m_currentList).ToList();
 
@@ -76,6 +79,8 @@ public class GoalPointCubeCastZoneMonoGenetic<T> : MonoBehaviour where T : MonoB
 
     private T Get(GameObject gameObject)
     {
+        if (gameObject == null) return null;
+
         T find = gameObject.GetComponent<T>();
         if (find != null) return find;
         find = gameObject.GetComponentInChildren<T>();
