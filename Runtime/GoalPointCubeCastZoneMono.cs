@@ -49,11 +49,16 @@ public class GoalPointCubeCastZoneMonoGenetic<T> : MonoBehaviour where T : MonoB
     public List<T> m_addedToList= new List<T>();
     public List<T> m_removeFromList= new List<T>();
 
+
+    public static void GetWorldToLocal_Point(in Vector3 worldPosition, in Vector3 positionReference, in Quaternion rotationReference, out Vector3 localPosition) =>
+          localPosition = Quaternion.Inverse(rotationReference) * (worldPosition - positionReference);
+
     public void Update()
     {
 
+        GetWorldToLocal_Point(m_cubeCastHalfExtendAnchor.position, m_cubeCastZone.position, m_cubeCastZone.rotation, out Vector3 localPosition);
 
-        Vector3 half = m_cubeCastZone.InverseTransformPoint(m_cubeCastHalfExtendAnchor.position);
+        Vector3 half = localPosition;
         RaycastHit [] hits = Physics.BoxCastAll(
             m_cubeCastZone.position, 
             half,
