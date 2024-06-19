@@ -58,7 +58,7 @@ public class GoalPointCubeCastZoneMonoGenetic<T> : MonoBehaviour where T : MonoB
             m_cubeCastZone.forward, m_cubeCastZone.rotation,0, m_maskToUse);
 
         m_previousList = m_currentList;
-        m_currentList= hits.Select(a => a.collider.gameObject.GetComponent<T>()).Where(a=>a).ToList();
+        m_currentList = hits.Select(a => Get(a.collider.gameObject)).Where(a => a).ToList();
         m_addedToList = m_currentList.Except(m_previousList).ToList();
         m_removeFromList = m_previousList.Except(m_currentList).ToList();
 
@@ -74,6 +74,12 @@ public class GoalPointCubeCastZoneMonoGenetic<T> : MonoBehaviour where T : MonoB
 
     }
 
+    private T Get(GameObject gameObject)
+    {
+        T find = gameObject.GetComponentInChildren<T>();
+        if (find != null) return find;
+        return gameObject.GetComponentInChildren<T>();
+    }
 
     public void DetectedAsEntered(T script)
     {
