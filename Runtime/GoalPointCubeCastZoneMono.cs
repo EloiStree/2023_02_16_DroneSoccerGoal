@@ -76,9 +76,11 @@ public class GoalPointCubeCastZoneMonoGenetic<T> : MonoBehaviour where T : MonoB
 
     private T Get(GameObject gameObject)
     {
-        T find = gameObject.GetComponentInChildren<T>();
+        T find = gameObject.GetComponent<T>();
         if (find != null) return find;
-        return gameObject.GetComponentInChildren<T>();
+        find = gameObject.GetComponentInChildren<T>();
+        if (find != null) return find;
+        return gameObject.GetComponentInParent<T>();
     }
 
     public void DetectedAsEntered(T script)
