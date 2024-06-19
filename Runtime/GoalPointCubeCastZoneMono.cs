@@ -129,8 +129,8 @@ public class GoalPointCubeCastZoneMonoGenetic<T> : MonoBehaviour where T : MonoB
             }
 
             DroneCollisionWithEntry record = m_dronesInCollision[script];
-            bool wasFrontEntry = m_goalDirection.InverseTransformPoint(record.m_rootWhenEnterPosition).z > 0;
-            bool wasBackExit = m_goalDirection.InverseTransformPoint(record.m_rootWhenExitPosition).z <= 0;
+            bool wasFrontEntry = m_goalDirection.InverseTransformPoint(record.m_rootWhenEnterPosition).z <= 0;
+            bool wasBackExit = m_goalDirection.InverseTransformPoint(record.m_rootWhenExitPosition).z > 0;
             bool isValideGoal  = wasFrontEntry && wasBackExit;
             if (isValideGoal) {
                 m_pointCountForDebug++;
