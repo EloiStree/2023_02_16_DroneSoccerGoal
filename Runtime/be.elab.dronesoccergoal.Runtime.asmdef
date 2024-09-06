@@ -1,8 +1,8 @@
 {
-    "name": "be.eloistree.dronesoccergoal",
+    "name": "be.elab.dronesoccergoal",
     "rootNamespace": "",
     "references": [
-        "be.eloistree.generaltoolbox"
+        "be.elab.generaltoolbox"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
