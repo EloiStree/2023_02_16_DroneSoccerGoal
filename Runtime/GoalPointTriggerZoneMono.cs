@@ -18,7 +18,7 @@ public class GoalPointTriggerZoneMonoGenetic<T> : MonoBehaviour where T : MonoBe
 
     public int          m_pointCountForDebug;
     public UnityEvent   m_onValideGoal;
-    public Eloi.PrimitiveUnityEvent_Int m_onPointChanged;
+    public UnityEvent<int> m_onPointChanged;
 
     [System.Serializable]
     public class DroneCollisionWithEntry {

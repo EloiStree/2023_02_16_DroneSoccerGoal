@@ -22,7 +22,7 @@ public class GoalPointCubeCastZoneMonoGenetic<T> : MonoBehaviour where T : MonoB
 
     public int          m_pointCountForDebug;
     public UnityEvent   m_onValideGoal;
-    public Eloi.PrimitiveUnityEvent_Int m_onPointChanged;
+    public UnityEvent<int> m_onPointChanged;
 
 
     public DroneCollisionWithEntry m_lastValide;
